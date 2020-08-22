@@ -1,0 +1,11 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://admin:admin@localhost:8761/eureka/
+server:
+  port: 8200
+
+# 给服务定义别名，让Eureka上可以订阅查询
+spring:
+  application:
+    name: SEARCH

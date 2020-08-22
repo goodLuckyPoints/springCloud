@@ -1,0 +1,31 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://admin:admin@localhost:8761/eureka/
+
+spring:
+  application:
+    name: CONFIGSERVER
+  cloud:
+    config:
+      server:
+        # 拉取git配置文件
+        git:
+          uri: https://github.com/goodLuckyPoints/configserver.git
+  rabbitmq:
+    # 通过git手动刷新放行git请求到config服务器，将更改的消息存放在消息队列中
+    host: 192.168.194.137
+    port: 5672
+    username: admin
+    password: admin
+    virtual-host: admin
+server:
+  port: 8888
+
+# 放行git请求
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+

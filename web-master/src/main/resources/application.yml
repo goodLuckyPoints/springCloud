@@ -1,0 +1,42 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://admin:admin@localhost:8761/eureka/
+server:
+  port: 8083
+
+version: v1
+
+spring:
+  application:
+    name: webmaster
+  rabbitmq:
+    port: 5672
+    username: admin
+    password: admin
+    virtual-host: admin
+    host: 192.168.194.137
+  zipkin:
+    base-url: http://192.168.194.137:9410/
+    sender:
+      # 通过web发送到zipkin
+      type: web
+  # 监听链路追踪日志信息
+  sleuth:
+    sampler:
+      # 10个请求获取一个
+      probability: 1.0
+SEARCH:
+  ribbon:
+    # ribbon轮询机制
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
+feign:
+  # feign与hystrix整合组件
+  hystrix:
+    enabled: true
+
+# 配置监听日志进行链路追踪日志信息，监听前端控制器
+logging:
+  level:
+    org.springframework.web.servlet.DispatcherServlet: debug

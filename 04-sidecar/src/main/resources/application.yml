@@ -1,0 +1,12 @@
+erver:
+  port: 5678
+eureka:
+  client:
+    service-url:
+      defaultZone: http://admin:admin@localhost:8761/eureka/
+spring:
+  application:
+    name: SIDECAR-PYTHON
+# 非java平台同localhost下的路径
+sidecar:
+  port: 65534

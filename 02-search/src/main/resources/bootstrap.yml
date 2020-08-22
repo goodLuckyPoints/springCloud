@@ -1,0 +1,38 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://admin:admin@localhost:8761/eureka/
+spring:
+  cloud:
+    config:
+      discovery:
+        enabled: true            # 开启configClient客户端
+        service-id: CONFIGSERVER # 设置eureka中config服务名
+      profile: dev               # 指定环境
+      label: master              # git的主分支
+  application:
+    name: SEARCH                 # eureka地址信息名称
+  rabbitmq:
+    username: admin
+    password: admin
+    virtual-host: admin
+    port: 5672
+    host: 192.168.194.137
+  zipkin:
+    base-url: http://192.168.194.137:9410/
+    sender:
+      # 通过web发送到zipkin
+      type: web
+  # 监听链路追踪日志信息
+  sleuth:
+    sampler:
+      # 10个请求获取一个
+      probability: 1.0
+# 配置监听日志进行链路追踪日志信息，监听前端控制器,请求发送到服务器谁是主链路
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          servlet:
+            DispatcherServlet: debug
